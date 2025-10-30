@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Julie Ribeiro Fernandes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2C5F8D;
+            --secondary-color: #D4AF37;
+            --accent-color: #1A4570;
+            --bg-main: #FFFFFF;
+            --bg-light: #F8F9FA;
+            --text-primary: #1A1A1A;
+            --text-secondary: #4A4A4A;
+            --text-light: #FFFFFF;
+            --border-color: #E0E0E0;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body.night-mode {
+            --primary-color: #7B9BB5;
+            --secondary-color: #E8D8B8;
+            --accent-color: #95ABC2;
+            --bg-main: #FAFAFA;
+            --bg-light: #F0F0F0;
+            --text-primary: #2A2A2A;
+            --text-secondary: #5A5A5A;
+            --text-light: #2A2A2A;
+            --border-color: #D5D5D5;
+            --shadow: rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.4;
+            color: var(--text-primary);
+            background: #E5E5E5;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .cv-container {
+            max-width: 210mm;
+            height: 297mm;
+            margin: 0 auto;
+            background: var(--bg-main);
+            box-shadow: 0 0 20px var(--shadow);
+            padding: 12mm;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Barre d'actions */
+        .action-bar {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .btn-download {
+            background: var(--primary-color);
+            color: var(--text-light);
+        }
+
+        .btn-download:hover {
+            background: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-theme {
+            background: var(--bg-light);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-theme:hover {
+            background: var(--secondary-color);
+        }
+
+        /* BLOC SUPÉRIEUR : Photo + Présentation + Contact */
+        .top-section {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 15px;
+            margin-bottom: 5px;
+        }
+
+        .photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid var(--secondary-color);
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .right-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Présentation */
+        .presentation-box {
+            background: var(--bg-light);
+            padding: 12px 15px;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 5px;
+        }
+
+        .header-title {
+            margin-bottom: 8px;
+        }
+
+        .name {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+        }
+
+        .title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        .age {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .presentation-text {
+            font-size: 10.5px;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            text-align: justify;
+            margin-top: 8px;
+        }
+
+        /* Contact */
+        .contact-box {
+            background: var(--bg-light);
+            padding: 10px 15px;
+            border-left: 4px solid var(--secondary-color);
+            border-radius: 5px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 10px;
+            color: var(--text-secondary);
+        }
+
+        .contact-icon {
+            font-size: 12px;
+        }
+
+        /* BLOC COMPÉTENCES : Grid 2 lignes x 3 colonnes */
+        .competences-section {
+            background: var(--bg-light);
+            padding: 12px 15px;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 5px;
+        }
+
+        .competences-section h2 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .competences-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .competence-item {
+            background: var(--bg-main);
+            padding: 8px 10px;
+            border-radius: 4px;
+            font-size: 10px;
+            color: var(--text-secondary);
+            border-left: 3px solid var(--secondary-color);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .competence-item:hover {
+            transform: translateX(3px);
+            border-left-color: var(--primary-color);
+        }
+
+        /* BLOC PRINCIPAL : Expériences + Formations */
+        .main-content {
+            display: grid;
+            grid-template-columns: 60% 38%;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .section h2 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--secondary-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Expériences */
+        .experiences-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .experiences-list {
+            flex: 1;
+        }
+
+        .experience-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: var(--bg-light);
+            border-radius: 4px;
+            border-left: 3px solid var(--secondary-color);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 5px;
+            gap: 8px;
+        }
+
+        .experience-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .experience-date {
+            font-size: 9px;
+            color: var(--text-light);
+            background: var(--primary-color);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .experience-company {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 2px;
+        }
+
+        .experience-status {
+            font-size: 9px;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+
+        .experience-description {
+            font-size: 9.5px;
+            line-height: 1.4;
+            color: var(--text-secondary);
+            text-align: justify;
+        }
+
+        /* Langues */
+        .langues-section {
+            background: var(--bg-light);
+            padding: 10px 12px;
+            border-left: 4px solid var(--secondary-color);
+            border-radius: 5px;
+        }
+
+        .langues-section h2 {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .language-item {
+            margin-bottom: 8px;
+        }
+
+        .language-name {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .language-level {
+            font-size: 9px;
+            color: var(--text-secondary);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 5px;
+            background: var(--bg-main);
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 5px;
+            transition: width 0.6s ease;
+        }
+
+        /* Formations */
+        .formations-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .formation-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: var(--bg-light);
+            border-radius: 4px;
+            border-left: 3px solid var(--secondary-color);
+        }
+
+        .formation-date {
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+        }
+
+        .formation-title {
+            font-size: 10.5px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 3px;
+            line-height: 1.3;
+        }
+
+        .formation-school {
+            font-size: 9px;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 1024px) {
+            body {
+                padding: 10px;
+            }
+
+            .cv-container {
+                max-width: 100%;
+                height: auto;
+                padding: 15px;
+            }
+
+            .action-bar {
+                position: static;
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+
+            .top-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .photo {
+                margin: 0 auto;
+            }
+
+            .contact-box {
+                grid-template-columns: 1fr;
+            }
+
+            .competences-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .competences-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Print - CORRECTION BUG BARRES */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .cv-container {
+                max-width: 100%;
+                box-shadow: none;
+                margin: 0;
+                padding: 10mm;
+                height: auto;
+            }
+
+            .action-bar {
+                display: none !important;
+            }
+
+            /* IMPORTANT : Forcer l'affichage des barres à l'impression */
+            .progress-bar,
+            .progress-fill {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            .progress-fill {
+                background: linear-gradient(90deg, #2C5F8D, #D4AF37) !important;
+            }
+
+            body.night-mode .progress-fill {
+                background: linear-gradient(90deg, #7B9BB5, #E8D8B8) !important;
+            }
+
+            @page {
+                size: A4;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="action-bar">
+        <button class="btn btn-download" onclick="downloadPDF()">
+            <span>📥</span>
+            Télécharger mon CV
+        </button>
+        <button class="btn btn-theme" onclick="toggleTheme()">
+            <span id="theme-icon">🌙</span>
+            <span id="theme-text">Mode Nuit</span>
+        </button>
+    </div>
+
+    <div class="cv-container">
+        <!-- BLOC SUPÉRIEUR : Photo + Présentation + Contact -->
+        <div class="top-section">
+            <div class="photo">
+                <img src="julie01.png" alt="Julie Ribeiro Fernandes">
+            </div>
+            <div class="right-info">
+                <!-- Présentation -->
+                <div class="presentation-box">
+                    <div class="header-title">
+                        <h1 class="name">JULIE RIBEIRO FERNANDES</h1>
+                        <p class="title">Gestionnaire de Patrimoine</p>
+                        <p class="age">27 ans</p>
+                    </div>
+                    <p class="presentation-text">
+						Naturellement dotée d'une aisance relationnelle et d'un fort sens du commerce, je suis dynamique, déterminée et ambitieuse, avec un goût prononcé pour le challenge et le travail en équipe. Issue de formations juridiques et patrimoniales, je bénéficie de plusieurs années d'expérience en conseil et en élaboration de stratégies d'investissement personnalisées, pour accompagner mes clients dans l'atteinte de leurs objectifs financiers et la structuration de leur patrimoine.                      
+                    </p>
+                </div>
+                <!-- Contact -->
+                <div class="contact-box">
+                    <div class="contact-item">
+                        <span class="contact-icon">📱</span>
+                        <span>07 44 40 25 94</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">✉️</span>
+                        <span>julie.ribeirofernandes@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <span>62000 Arras</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOC COMPÉTENCES : Grid 2x3 -->
+        <section class="competences-section">
+            <h2>Compétences</h2>
+            <div class="competences-grid">
+                <div class="competence-item">Portefeuille haut de gamme</div>
+                <div class="competence-item">Cadres juridiques & fiscaux</div>
+                <div class="competence-item">Analyse financière</div>
+                <div class="competence-item">Marchés internationaux</div>
+                <div class="competence-item">Gestion des risques</div>
+                <div class="competence-item">Produits financiers</div>
+            </div>
+        </section>
+
+        <!-- BLOC PRINCIPAL : Expériences + Formations -->
+        <div class="main-content">
+            <!-- COLONNE GAUCHE : Expériences seulement -->
+            <div class="experiences-column">
+                <section class="experiences-list">
+                    <h2>Expériences Professionnelles</h2>
+                    
+                    <article class="experience-item">
+                        <div class="experience-header">
+                            <div>
+                                <h3 class="experience-title">Gestionnaire de Patrimoine</h3>
+                                <p class="experience-company">Milestone - Family Office (Paris 16)</p>
+                                <p class="experience-status">Salarié Cadre, CDI</p>
+                            </div>
+                            <span class="experience-date">Jan. 2025 - Mai 2025</span>
+                        </div>
+                        <p class="experience-description">
+                            Conseil patrimonial global pour clients HNWI, structuration de portefeuilles en architecture ouverte et coordination avec partenaires juridiques et fiscaux. Suivi des allocations et gestion des risques.
+                        </p>
+                    </article>
+
+                    <article class="experience-item">
+                        <div class="experience-header">
+                            <div>
+                                <h3 class="experience-title">Banquier Privé</h3>
+                                <p class="experience-company">Gresham Banque Privée (Paris 7)</p>
+                                <p class="experience-status">Salarié Cadre, CDI</p>
+                            </div>
+                            <span class="experience-date">Jan. 2024 - Sept. 2024</span>
+                        </div>
+                        <p class="experience-description">
+                            Gestion d'un portefeuille de cadres et professions libérales, réalisation de bilans patrimoniaux, optimisation fiscale et préconisation de solutions en assurance-vie, PER et transmission.
+                        </p>
+                    </article>
+
+                    <article class="experience-item">
+                        <div class="experience-header">
+                            <div>
+                                <h3 class="experience-title">Consultante en Gestion de Patrimoine</h3>
+                                <p class="experience-company">Cabinet IGC (Paris 8)</p>
+                                <p class="experience-status">Statut indépendant</p>
+                            </div>
+                            <span class="experience-date">Jan. 2023 - Jan. 2024</span>
+                        </div>
+                        <p class="experience-description">
+                            Création et gestion d'un portefeuille client, réalisation d'audits patrimoniaux, conseil fiscal et juridique, vente de solutions financières et immobilières (VEFA).
+                        </p>
+                    </article>
+
+                    <article class="experience-item">
+                        <div class="experience-header">
+                            <div>
+                                <h3 class="experience-title">Expert Crédit et Assurance</h3>
+                                <p class="experience-company">PRESTIGITAUX (Arras)</p>
+                                <p class="experience-status">Statut indépendant</p>
+                            </div>
+                            <span class="experience-date">2019 - 2022</span>
+                        </div>
+                        <p class="experience-description">
+                            Développement commercial et accompagnement des clients dans le montage et la négociation de crédits immobiliers et assurances emprunteur, avec conseils juridiques et fiscaux.
+                        </p>
+                    </article>
+                </section>
+            </div>
+
+        <!-- COLONNE DROITE : Formations + Langues -->
+            <div class="formations-column">
+                <section>
+                    <h2>Formations</h2>
+                    
+                    <article class="formation-item">
+                        <div class="formation-date">2022 - 2023</div>
+                        <h3 class="formation-title">Master - Conseiller en Gestion de Patrimoine</h3>
+                        <p class="formation-school">Juriscampus, e-learning</p>
+                    </article>
+
+                    <article class="formation-item">
+                        <div class="formation-date">2020</div>
+                        <h3 class="formation-title">Capacité en Investissement et Patrimoine</h3>
+                        <p class="formation-school">Juriscampus, e-learning</p>
+                    </article>
+
+                    <article class="formation-item">
+                        <div class="formation-date">2019</div>
+                        <h3 class="formation-title">Formation IOBSP</h3>
+                        <p class="formation-school">Orica, e-learning</p>
+                    </article>
+
+                    <article class="formation-item">
+                        <div class="formation-date">2016 - 2018</div>
+                        <h3 class="formation-title">Licence de Droit</h3>
+                        <p class="formation-school">Faculté sciences politiques, juridiques et sociales, LILLE</p>
+                    </article>
+                </section>
+
+                <!-- LANGUES en bas de la colonne droite -->
+                <section class="langues-section" style="margin-top: 12px;">
+                    <h2>Langues</h2>
+                    <div class="language-item">
+                        <div class="language-name">
+                            <span>🇫🇷 Français</span>
+                            <span class="language-level">Natif</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">
+                            <span>🇬🇧 Anglais</span>
+                            <span class="language-level">B2</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">
+                            <span>🇪🇸 Espagnol</span>
+                            <span class="language-level">B1</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 40%;"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+            
+            body.classList.toggle('night-mode');
+            
+            if (body.classList.contains('night-mode')) {
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Mode Jour';
+            } else {
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Mode Nuit';
+            }
+        }
+
+        function downloadPDF() {
+            const actionBar = document.querySelector('.action-bar');
+            actionBar.style.display = 'none';
+            window.print();
+            setTimeout(() => {
+                actionBar.style.display = 'flex';
+            }, 100);
+        }
+    </script>
+</body>
+</html>
